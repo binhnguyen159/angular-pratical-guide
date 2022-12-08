@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { PostsService } from './posts/post.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'mean-stack-practical-guide';
+export class AppComponent implements OnInit {
+
+  constructor(private postsService: PostsService) {}
+
+  ngOnInit(): void {
+  }
 }
