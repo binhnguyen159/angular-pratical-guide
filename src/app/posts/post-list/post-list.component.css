@@ -6,3 +6,10 @@
 .info-text {
   text-align: center;
 }
+
+
+mat-spinner {
+  margin: auto;
+  width: 50px !important;
+  height: 50px !important;
+}

@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-const Post = require("./models/post");
+const routerPosts = require("./routes/posts");
 
 const app = express();
 
@@ -34,39 +34,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/api/posts", async (req, res, next) => {
-  const posts = await Post.find().then((res) => {
-    return res;
-  });
-
-  res.status(200).json({
-    message: "Successfully fetch data",
-    posts,
-  });
-});
-
-app.post("/api/posts", (req, res, next) => {
-  const post = new Post({
-    // title and content
-    // title: req.body.title,
-    // content: req.body.content
-    ...req.body,
-  });
-  //auto return
-  post.save();
-  res.status(201).json({
-    message: "post add successfully",
-    postId: post._id
-  });
-});
-
-app.delete("/api/posts/:id", (req, res, next) => {
-  Post.deleteOne({ _id: req.params.id }).then((res) => {
-    console.log(123, res);
-  });
-  res.status(200).json({
-    message: "Post deleted!",
-  });
-});
+app.use("/api/posts", routerPosts);
 
 module.exports = app;
